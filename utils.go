@@ -1,12 +1,12 @@
 /*
 
-Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers
+Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers, The BLOC Developers
 
 Please see the included LICENSE file for more information
 
 */
 
-package turtlecoinrpc
+package blocrpc
 
 import (
 	"bytes"
@@ -17,7 +17,7 @@ import (
 	"strconv"
 )
 
-func (daemon *TurtleCoind) makeGetRequest(method string) *bytes.Buffer {
+func (daemon *BLOCd) makeGetRequest(method string) *bytes.Buffer {
 	req, err := http.NewRequest("GET", "http://"+daemon.URL+":"+strconv.Itoa(daemon.Port)+"/"+method, nil)
 	if err != nil {
 		fmt.Println(err)
@@ -26,7 +26,7 @@ func (daemon *TurtleCoind) makeGetRequest(method string) *bytes.Buffer {
 	return decodeResponse(req)
 }
 
-func (daemon *TurtleCoind) makePostRequest(method string, params interface{}) *bytes.Buffer {
+func (daemon *BLOCd) makePostRequest(method string, params interface{}) *bytes.Buffer {
 	payload := make(map[string]interface{})
 	payload["jsonrpc"] = "2.0"
 	payload["method"] = method

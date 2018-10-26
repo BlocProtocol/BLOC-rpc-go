@@ -1,12 +1,12 @@
 /*
 
-Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers
+Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers, The BLOC Developers
 
 Please see the included LICENSE file for more information
 
 */
 
-package turtlecoinrpc
+package blocrpc
 
 import (
 	"bytes"

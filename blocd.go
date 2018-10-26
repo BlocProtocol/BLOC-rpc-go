@@ -1,37 +1,37 @@
 /*
 
-Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers
+Copyright (c) 2018 Rashed Mohammed, The TurtleCoin Developers, The BLOC Developers
 
 Please see the included LICENSE file for more information
 
 */
 
-package turtlecoinrpc
+package blocrpc
 
 import (
 	"bytes"
 )
 
-// TurtleCoind structure contains the
+// BLOCd structure contains the
 // URL and Port info of node for RPC calls
-type TurtleCoind struct {
+type BLOCd struct {
 	URL  string
 	Port int
 }
 
-func (daemon *TurtleCoind) check() {
+func (daemon *BLOCd) check() {
 	if daemon.URL == "" {
 		daemon.URL = "127.0.0.1"
 	}
 	if daemon.Port == 0 {
-		daemon.Port = 11898
+		daemon.Port = 2086
 	}
 }
 
 /*
 Info method returns information related to network and connection
 */
-func (daemon *TurtleCoind) Info() *bytes.Buffer {
+func (daemon *BLOCd) Info() *bytes.Buffer {
 	daemon.check()
 	return daemon.makeGetRequest("getinfo")
 }
@@ -39,13 +39,13 @@ func (daemon *TurtleCoind) Info() *bytes.Buffer {
 /*
 Height method returns the height of the blockchain
 */
-func (daemon *TurtleCoind) Height() *bytes.Buffer {
+func (daemon *BLOCd) Height() *bytes.Buffer {
 	daemon.check()
 	return daemon.makeGetRequest("getheight")
 }
 
 /*
-func (daemon *TurtleCoind) Transactions() *bytes.Buffer {
+func (daemon *BLOCd) Transactions() *bytes.Buffer {
 	daemon.check()
 	return daemon.makeGetRequest("gettransactions")
 }
@@ -54,7 +54,7 @@ func (daemon *TurtleCoind) Transactions() *bytes.Buffer {
 /*
 Fee method returns the fee set by the node
 */
-func (daemon *TurtleCoind) Fee() *bytes.Buffer {
+func (daemon *BLOCd) Fee() *bytes.Buffer {
 	daemon.check()
 	return daemon.makeGetRequest("feeinfo")
 }
@@ -62,7 +62,7 @@ func (daemon *TurtleCoind) Fee() *bytes.Buffer {
 /*
 Peers method returns array of peers connected to daemon
 */
-func (daemon *TurtleCoind) Peers() *bytes.Buffer {
+func (daemon *BLOCd) Peers() *bytes.Buffer {
 	daemon.check()
 	return daemon.makeGetRequest("getpeers")
 }
@@ -70,7 +70,7 @@ func (daemon *TurtleCoind) Peers() *bytes.Buffer {
 /*
 GetBlocks method returns information on 30 blocks from specified height (inclusive)
 */
-func (daemon *TurtleCoind) GetBlocks(height int) *bytes.Buffer {
+func (daemon *BLOCd) GetBlocks(height int) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["height"] = height
@@ -80,7 +80,7 @@ func (daemon *TurtleCoind) GetBlocks(height int) *bytes.Buffer {
 /*
 GetBlock method returns the information of block corresponding to given input hash
 */
-func (daemon *TurtleCoind) GetBlock(hash string) *bytes.Buffer {
+func (daemon *BLOCd) GetBlock(hash string) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["hash"] = hash
@@ -90,7 +90,7 @@ func (daemon *TurtleCoind) GetBlock(hash string) *bytes.Buffer {
 /*
 GetTransaction method returns information of transaction corresponding to given input hash
 */
-func (daemon *TurtleCoind) GetTransaction(hash string) *bytes.Buffer {
+func (daemon *BLOCd) GetTransaction(hash string) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["hash"] = hash
@@ -100,7 +100,7 @@ func (daemon *TurtleCoind) GetTransaction(hash string) *bytes.Buffer {
 /*
 GetTransactionPool method returns the list of unconfirmed transactions present in mem pool
 */
-func (daemon *TurtleCoind) GetTransactionPool() *bytes.Buffer {
+func (daemon *BLOCd) GetTransactionPool() *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	return daemon.makePostRequest("f_on_transactions_pool_json", params)
@@ -109,7 +109,7 @@ func (daemon *TurtleCoind) GetTransactionPool() *bytes.Buffer {
 /*
 GetBlockCount method returns the height of the top block
 */
-func (daemon *TurtleCoind) GetBlockCount() *bytes.Buffer {
+func (daemon *BLOCd) GetBlockCount() *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	return daemon.makePostRequest("getblockcount", params)
@@ -118,7 +118,7 @@ func (daemon *TurtleCoind) GetBlockCount() *bytes.Buffer {
 /*
 GetBlockHash method returns the block hash by height
 */
-func (daemon *TurtleCoind) GetBlockHash(height int) *bytes.Buffer {
+func (daemon *BLOCd) GetBlockHash(height int) *bytes.Buffer {
 	daemon.check()
 	params := []int{height}
 	return daemon.makePostRequest("on_getblockhash", params)
@@ -127,7 +127,7 @@ func (daemon *TurtleCoind) GetBlockHash(height int) *bytes.Buffer {
 /*
 GetBlockTemplate method returns the block template blob of the last block
 */
-func (daemon *TurtleCoind) GetBlockTemplate(reserveSize int, walletAddress string) *bytes.Buffer {
+func (daemon *BLOCd) GetBlockTemplate(reserveSize int, walletAddress string) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["reserve_size"] = reserveSize
@@ -138,7 +138,7 @@ func (daemon *TurtleCoind) GetBlockTemplate(reserveSize int, walletAddress strin
 /*
 GetCurrencyID method returns the currency id of the network
 */
-func (daemon *TurtleCoind) GetCurrencyID() *bytes.Buffer {
+func (daemon *BLOCd) GetCurrencyID() *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	return daemon.makePostRequest("getcurrencyid", params)
@@ -147,7 +147,7 @@ func (daemon *TurtleCoind) GetCurrencyID() *bytes.Buffer {
 /*
 SubmitBlock method submits a block to the network corresponding to the input block blob
 */
-func (daemon *TurtleCoind) SubmitBlock(blockBlob string) *bytes.Buffer {
+func (daemon *BLOCd) SubmitBlock(blockBlob string) *bytes.Buffer {
 	daemon.check()
 	params := []string{blockBlob}
 	return daemon.makePostRequest("submitblock", params)
@@ -156,7 +156,7 @@ func (daemon *TurtleCoind) SubmitBlock(blockBlob string) *bytes.Buffer {
 /*
 GetLastBlockHeader method returns the block header of the last block
 */
-func (daemon *TurtleCoind) GetLastBlockHeader() *bytes.Buffer {
+func (daemon *BLOCd) GetLastBlockHeader() *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	return daemon.makePostRequest("getlastblockheader", params)
@@ -165,7 +165,7 @@ func (daemon *TurtleCoind) GetLastBlockHeader() *bytes.Buffer {
 /*
 GetBlockHeaderByHash method returns the block header corresponding to the input block hash
 */
-func (daemon *TurtleCoind) GetBlockHeaderByHash(hash string) *bytes.Buffer {
+func (daemon *BLOCd) GetBlockHeaderByHash(hash string) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["hash"] = hash
@@ -175,7 +175,7 @@ func (daemon *TurtleCoind) GetBlockHeaderByHash(hash string) *bytes.Buffer {
 /*
 GetBlockHeaderByHeight method returns the block header corresponding to the input block height
 */
-func (daemon *TurtleCoind) GetBlockHeaderByHeight(height int) *bytes.Buffer {
+func (daemon *BLOCd) GetBlockHeaderByHeight(height int) *bytes.Buffer {
 	daemon.check()
 	params := make(map[string]interface{})
 	params["height"] = height
