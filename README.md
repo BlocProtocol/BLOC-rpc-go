@@ -1,4 +1,4 @@
-# TurtleCoin RPC API
+# BLOC RPC API
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/furiousteam/BLOC-rpc-go)](https://goreportcard.com/report/github.com/furiousteam/BLOC-rpc-go)
 [![GoDoc](https://godoc.org/github.com/furiousteam/BLOC-rpc-go?status.svg)](https://godoc.org/github.com/furiousteam/BLOC-rpc-go)
